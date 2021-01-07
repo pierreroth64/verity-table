@@ -60,7 +60,8 @@ export function createTable<R>(desc: TableDescription<R>): Table<R> {
       const lineStr = buildString(values as RunArg[]);
 
       if (lineStr === argStr) {
-        return _.last(line);
+        const result = _.last(line);
+        return typeof result === 'function' ? result() : result;
       }
     }
   }

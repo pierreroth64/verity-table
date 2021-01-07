@@ -65,6 +65,21 @@ describe('Table', () => {
 
       expect(result).toEqual({ data: 4 });
     });
+
+    it('should run the callback if result is a callback', () => {
+      const table = createTable<any>({
+        lines: [
+          [false, false, { data: 1 }],
+          [false, true, { data: 2 }],
+          [true, false, { data: 3 }],
+          [true, true, () => ({ data: 4 })],
+        ],
+      });
+
+      const result = table.run([true, true]);
+
+      expect(result).toEqual({ data: 4 });
+    });
   });
 
   describe('display', () => {
