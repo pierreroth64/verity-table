@@ -66,7 +66,10 @@ export function createTable<R>(desc: TableDescription<R>): Table<R> {
   }
 
   function display(): void {
-    console.table(tableDescription.lines);
+    const table = tableDescription.columnTitles
+      ? [tableDescription.columnTitles, ...tableDescription.lines]
+      : tableDescription.lines;
+    console.table(table);
   }
 }
 

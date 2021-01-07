@@ -68,8 +68,22 @@ describe('Table', () => {
   });
 
   describe('display', () => {
-    it('should have a display method', () => {
+    it('should display without column titles', () => {
       const table = createTable({
+        lines: [
+          [false, false, { data: 1 }],
+          [false, true, { data: 2 }],
+          [true, false, { data: 3 }],
+          [true, true, { data: 4 }],
+        ],
+      });
+
+      table.display();
+    });
+
+    it('should display with column titles', () => {
+      const table = createTable({
+        columnTitles: ['first col', 'second col'],
         lines: [
           [false, false, { data: 1 }],
           [false, true, { data: 2 }],
