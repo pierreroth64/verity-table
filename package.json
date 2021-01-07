@@ -19,7 +19,8 @@
     "test": "run-s -c prettier:check compile jest tslint",
     "prebuild": "rm -rf ./build",
     "build": "tsc -p ./tsconfig.prod.json",
-    "preversion": "run-s test build"
+    "preversion": "run-s test build",
+    "postversion": "git push && git push --tags && npm publish --access=public"
   },
   "dependencies": {
     "lodash": "4.17.20"
