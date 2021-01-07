@@ -1,0 +1,41 @@
+{
+  "name": "verity-table",
+  "version": "1.0.0-dev.0",
+  "description": "A simple verity table",
+  "author": "pierreroth64",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/pierreroth64/verity-table.git"
+  },
+  "main": "build/index.js",
+  "scripts": {
+    "tslint": "tslint --fix 'lib/**/*.ts'",
+    "jest": "jest --config ./test/jest.config.js",
+    "testw": "jest --config ./test/jest.config.js --watch",
+    "prettier": "prettier --write '**/*.{js,json,md,ts}'",
+    "prettier:check": "prettier --check '**/*.{js,json,md,ts}'",
+    "compile": "tsc",
+    "test": "run-s -c prettier:check compile jest tslint",
+    "prebuild": "rm -rf ./build",
+    "build": "tsc -p ./tsconfig.prod.json",
+    "preversion": "run-s test build"
+  },
+  "dependencies": {
+    "lodash": "4.17.20"
+  },
+  "devDependencies": {
+    "@types/jest": "26.0.18",
+    "@types/lodash": "4.14.165",
+    "@types/luxon": "1.25.0",
+    "@types/node": "14.14.12",
+    "jest": "26.6.3",
+    "npm-run-all": "4.1.5",
+    "prettier": "2.2.1",
+    "ts-jest": "26.4.4",
+    "ts-node": "9.1.1",
+    "tslint": "6.1.3",
+    "tslint-config-prettier": "1.18.0",
+    "typescript": "4.1.2"
+  }
+}
