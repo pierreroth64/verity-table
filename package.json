@@ -8,6 +8,11 @@
     "type": "git",
     "url": "ssh://git@github.com/pierreroth64/verity-table.git"
   },
+  "keywords": [
+    "table",
+    "verity",
+    "karnaugh"
+  ],
   "main": "build/index.js",
   "scripts": {
     "tslint": "tslint --fix 'lib/**/*.ts'",
