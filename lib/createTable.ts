@@ -1,5 +1,6 @@
 import * as _ from 'lodash';
 import debugLib from 'debug';
+import { table } from 'table';
 
 const debug = debugLib('');
 debug.enabled = true;
@@ -72,29 +73,21 @@ export function createTable<R>(desc: TableDescription<R>): Table<R> {
 
   function display(): void {
     const { lines, columnTitles } = tableDescription;
-    const defaultPadding = 10;
-    let padding = defaultPadding;
+    const tableLines = [];
+
     if (columnTitles) {
-      const maxLength = (_.maxBy(columnTitles, (t) => t.length) || '').length;
-      padding = maxLength + 1 < defaultPadding ? defaultPadding : maxLength + 1;
-      const titlesStr = columnTitles
-        .map((v) => _.padEnd(v, padding, ' '))
-        .join(' | ');
-      const underline = _.padStart('', titlesStr.length, '-');
-      debug(titlesStr);
-      debug(underline);
+      tableLines.push([...columnTitles, '']);
     }
     for (const line of lines) {
       const values = _.dropRight(line);
       const result = _.last(line);
-      const valuesStr = values
-        .map((v) => (typeof v === 'function' ? v() : v))
-        .map((v) => _.padEnd(v, padding, ' '))
-        .join(' | ');
       const resultStr =
-        typeof result === 'function' ? result.toString() : result;
-      debug('%s | %O', valuesStr, resultStr);
+        typeof result === 'function'
+          ? result.toString()
+          : JSON.stringify(result, null, 4);
+      tableLines.push([...values, resultStr]);
     }
+    console.log(table(tableLines));
   }
 }
 

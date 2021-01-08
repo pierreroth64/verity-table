@@ -76,8 +76,6 @@ describe('Table', () => {
         ],
       });
 
-      table.display();
-
       const result = table.run([true, true]);
 
       expect(result).toEqual({ data: 4 });
@@ -99,13 +97,19 @@ describe('Table', () => {
     });
 
     it('should display with column titles', () => {
-      const table = createTable({
+      const table = createTable<any>({
         columnTitles: ['first col', 'second col'],
         lines: [
           [false, false, { data: 1 }],
           [false, true, { data: 2 }],
           [true, false, { data: 3 }],
-          [true, true, { data: 4 }],
+          [
+            true,
+            true,
+            () => {
+              return { data: 4 };
+            },
+          ],
         ],
       });
 
