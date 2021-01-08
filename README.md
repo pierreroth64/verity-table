@@ -41,6 +41,25 @@ const result2 = table.run([true, true]);
 expect(result).toEqual({ data: 4 });
 ```
 
+You can also display the table to visually check your verity table:
+
+```js
+import { createTable } from 'verity-table';
+
+const table = createTable({
+  lines: [
+    [false, false, { data: 1 }],
+    [false, true, { data: 2 }],
+    [true, false, { data: 3 }],
+    [true, true, { data: 4 }],
+  ],
+});
+
+table.display();
+```
+
+![table](./images/table.png?raw=true 'Table')
+
 ## Tests
 
 Standard unit test can be run with:
