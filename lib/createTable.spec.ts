@@ -76,6 +76,8 @@ describe('Table', () => {
         ],
       });
 
+      table.display();
+
       const result = table.run([true, true]);
 
       expect(result).toEqual({ data: 4 });

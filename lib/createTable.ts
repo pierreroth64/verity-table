@@ -1,4 +1,8 @@
 import * as _ from 'lodash';
+import debugLib from 'debug';
+
+const debug = debugLib('');
+debug.enabled = true;
 
 type RunArg = boolean | (() => boolean);
 
@@ -67,10 +71,30 @@ export function createTable<R>(desc: TableDescription<R>): Table<R> {
   }
 
   function display(): void {
-    const table = tableDescription.columnTitles
-      ? [tableDescription.columnTitles, ...tableDescription.lines]
-      : tableDescription.lines;
-    console.table(table);
+    const { lines, columnTitles } = tableDescription;
+    const defaultPadding = 10;
+    let padding = defaultPadding;
+    if (columnTitles) {
+      const maxLength = (_.maxBy(columnTitles, (t) => t.length) || '').length;
+      padding = maxLength + 1 < defaultPadding ? defaultPadding : maxLength + 1;
+      const titlesStr = columnTitles
+        .map((v) => _.padEnd(v, padding, ' '))
+        .join(' | ');
+      const underline = _.padStart('', titlesStr.length, '-');
+      debug(titlesStr);
+      debug(underline);
+    }
+    for (const line of lines) {
+      const values = _.dropRight(line);
+      const result = _.last(line);
+      const valuesStr = values
+        .map((v) => (typeof v === 'function' ? v() : v))
+        .map((v) => _.padEnd(v, padding, ' '))
+        .join(' | ');
+      const resultStr =
+        typeof result === 'function' ? result.toString() : result;
+      debug('%s | %O', valuesStr, resultStr);
+    }
   }
 }
 
