@@ -1,4 +1,4 @@
-# verity-table
+# `verity-table`
 
 [![CI](https://github.com/pierreroth64/verity-table/workflows/CI/badge.svg)](https://github.com/pierreroth64/verity-table/actions?query=workflow%3ACI)
 
