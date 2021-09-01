@@ -40,7 +40,7 @@ const tableWithCb = createTable({
 
 const result2 = table.run([true, true]);
 
-expect(result).toEqual({ data: 4 });
+expect(result2).toEqual({ data: 4 });
 ```
 
 You can also display the table to visually check your verity table:
